@@ -12,7 +12,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <View>
-        <Text style={styles.text}>Name: {name}</Text>
+        <Text style={styles.text}>Name {name}</Text>
         <Text>
           Name of Person is : {person.name} and his age is : {person.age}
         </Text>
