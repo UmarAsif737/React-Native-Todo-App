@@ -3,17 +3,23 @@ import { useState } from "react";
 import { StyleSheet, Text, View, TextInput } from "react-native";
 
 export default function App() {
-  const [name, setName] = useState("Umar");
-  const changeState = () => {
-    setName("Haseeb");
-    setPerson({ name: name, age: 24 });
+  const [name, setName] = useState("");
+  const handleChange = (e) => {
+    // console.log(e.target);
+    setName(e);
   };
   return (
     <View style={styles.container}>
       <View>
         <Text style={styles.text}>Name {name}</Text>
       </View>
-      <TextInput style={styles.input} />
+      <TextInput
+        style={styles.input}
+        onChangeText={handleChange}
+        value={name}
+        name="todo"
+        placeholder="Add a todo"
+      />
     </View>
   );
 }
@@ -31,6 +37,6 @@ const styles = StyleSheet.create({
     borderColor: "black",
     borderWidth: 1,
     margin: 10,
-    padding: 101,
+    padding: 10,
   },
 });
