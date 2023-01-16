@@ -7,6 +7,7 @@ import {
   TextInput,
   FlatList,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 
 export default function App() {
@@ -22,7 +23,20 @@ export default function App() {
   ]);
   const pressHandler = (id) => {
     console.log(id);
-    setName(name.filter((item) => item.id !== id));
+    Alert.alert(`Delete ${id}?`, "You want to delete this item? ", [
+      {
+        text: "Delete it",
+        onPress: () => {
+          setName(name.filter((item) => item.id !== id));
+        },
+      },
+      {
+        text: "Cancel",
+        onPress: () => {
+          return;
+        },
+      },
+    ]);
   };
 
   return (
@@ -31,7 +45,7 @@ export default function App() {
         numColumns={2}
         renderItem={({ item }) => (
           <TouchableOpacity onPress={() => pressHandler(item.id)}>
-            <Text style={styles.item}>{item.name}</Text>
+            <Text style={styles.item}>@{item.name}</Text>
           </TouchableOpacity>
         )}
         data={name}
