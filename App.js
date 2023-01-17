@@ -9,8 +9,8 @@ import {
   StatusBar,
 } from "react-native";
 import Header from "./components/header";
-import TodoItem from "./components/todoItem";
 import AddTodo from "./components/addTodo";
+import ListTodos from "./components/listTodos";
 
 export default function App() {
   const [todos, setTodos] = useState([
@@ -19,10 +19,26 @@ export default function App() {
     { text: "play on the switch", key: "3" },
   ]);
 
-  const pressHandler = (key) => {
-    setTodos((prevTodos) => {
-      return prevTodos.filter((todo) => todo.key != key);
-    });
+  const pressHandler = (item) => {
+    Alert.alert(
+      `Delete \"${item.text}\"?`,
+      "If you want to delete this todo press Yes otherwise No",
+      [
+        {
+          text: "Yes",
+          onPress: () =>
+            setTodos((prevTodos) => {
+              return prevTodos.filter((todo) => todo != item);
+            }),
+        },
+        {
+          text: "No",
+          onPress: () => {
+            return;
+          },
+        },
+      ]
+    );
   };
 
   const submitHandler = (text) => {
@@ -49,14 +65,7 @@ export default function App() {
         <Header />
         <View style={styles.content}>
           <AddTodo submitHandler={submitHandler} />
-          <View style={styles.list}>
-            <FlatList
-              data={todos}
-              renderItem={({ item }) => (
-                <TodoItem item={item} pressHandler={pressHandler} />
-              )}
-            />
-          </View>
+          <ListTodos todos={todos} pressHandler={pressHandler} />
         </View>
       </View>
     </TouchableWithoutFeedback>
