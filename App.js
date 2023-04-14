@@ -51,6 +51,7 @@ export default function App() {
         { text: "Understood", onPress: () => console.log("alert closed") },
       ]);
     }
+    Keyboard.dismiss();
   };
 
   return (
